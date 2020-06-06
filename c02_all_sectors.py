@@ -22,20 +22,14 @@ data = data.set_index(["GEO/TIME", "year"]) #Set Index to a multi index of count
 #%%
 plt.plot(data.loc['Germany'], label = "Germany")
 plt.plot(data.loc['France'], label = "France")
-plt.plot(data.loc['Belgium'], label = "Belgium")
-plt.plot(data.loc['Denmark'], label = "Denmark")
-plt.plot(data.loc['Spain'], label = "Spain")
-plt.plot(data.loc['Poland'], label = "Poland")
 plt.plot(data.loc['Italy'], label = "Italy")
+plt.plot(data.loc['Spain'], label = "Spain")
+plt.plot(data.loc['Netherlands'], label = "Netherlands")
+plt.plot(data.loc['Poland'], label = "Poland")
+plt.plot(data.loc['Belgium'], label = "Belgium")
 plt.plot(data.loc['Switzerland'], label = "Switzerland")
+plt.plot(data.loc['Sweden'], label = "Sweden")
 plt.title("Total Co2 Emmissions per Year")
 plt.ylabel("Tonnes Co2")
 
 plt.legend()
-#%%
-# blah blah blah
-# testing git
-print(data.index)
-# example 
-
-#example 2 
