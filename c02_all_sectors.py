@@ -13,8 +13,12 @@ import numpy as np
 #%%
 data = pd.read_excel('air_emmis.xls', skiprows = 10, na_values = ":") # Read in excel, skip header rows, : = na 
 data = pd.melt(data, id_vars = ["GEO/TIME"], var_name = 'year') # Melt data to make narrow/long
-data['year'] = data['year'].astype('float64') # Convert year column to a number 
+data['year'] = pd.to_datetime(data['year'])# Convert year column to a datetime
+data = data[data['year'] > '2007']  
+data = data[data['year'] < '2019']                         
+                
 data = data.set_index(["GEO/TIME", "year"]) #Set Index to a multi index of country and year
+
 #%%
 plt.plot(data.loc['Germany'], label = "Germany")
 plt.plot(data.loc['France'], label = "France")
@@ -27,11 +31,5 @@ plt.plot(data.loc['Switzerland'], label = "Switzerland")
 plt.plot(data.loc['Sweden'], label = "Sweden")
 plt.title("Total Co2 Emmissions per Year")
 plt.ylabel("Tonnes Co2")
-plt.xticks(np.arange(2008, 2018, step = 2))
-plt.xlim(2008, 2018)
+
 plt.legend()
-#%%
-# blah blah blah
-# testing git
-
-
