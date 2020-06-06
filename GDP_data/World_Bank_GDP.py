@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  6 09:34:52 2020
-
-@author: colburnhassman
+This code ia part of a larger analysis of EU Emmissions data. 
+The purpose of this program is to pull GDP data from the World Bank, 
+clean and subset the data, and export the data as a csv to be uses in 
+the main analysis program
+@author: Colburn Hassman
 """
 
-
+# Import required packages
 import pandas as pd
 import world_bank_data as wb
 import matplotlib.pyplot as plt
 
-#%%
-
+# Pull the data from the world bank
 gdp = wb.get_series('NY.GDP.MKTP.PP.CD', simplify_index = True)
 
-#%%
 # Create a new GDP dataframe from only the countries in question, 
 # which merges along the index of years
 GDP = pd.DataFrame({'Germany'     : gdp['Germany'],
@@ -29,11 +29,7 @@ GDP = pd.DataFrame({'Germany'     : gdp['Germany'],
                     'Belgium'     : gdp['Belgium']})
 
 GDP.index = pd.to_datetime(GDP.index) # Convert the index to DateTime object
-#%%
-plt.plot(GDP['Germany'])                   
-plt.ylim(0, 5000000000000) 
-plt.title("German GDP")
+GDP = GDP[(GDP.index > "2007") & (GDP.index < '2019')] 
+#subset the data to only be the relevant years
+GDP.to_csv('gdp_data.csv') #export the data to a csv file
 
-#%%
-GDP = GDP[GDP.index > "2008"]
-print(GDP.head())
